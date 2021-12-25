@@ -16,8 +16,6 @@
       <Column Name="ShipRegion" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
       <Column Name="ShipPostalCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="ShipCountry" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Association Name="Customers_Orders" Member="Customers" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customers" IsForeignKey="true" />
-      <Association Name="Employees_Orders" Member="Employees" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employees" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Customers" Member="Customers">
@@ -33,7 +31,6 @@
       <Column Name="Country" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
       <Column Name="Phone" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
       <Column Name="Fax" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
-      <Association Name="Customers_Orders" Member="Orders" ThisKey="CustomerID" OtherKey="CustomerID" Type="Orders" />
     </Type>
   </Table>
   <Table Name="dbo.Employees" Member="Employees">
@@ -52,13 +49,9 @@
       <Column Name="Country" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
       <Column Name="HomePhone" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
       <Column Name="Extension" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
-      <Column Name="Photo" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Notes" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="ReportsTo" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PhotoPath" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="Employees_Orders" Member="Orders" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Orders" />
-      <Association Name="Employees_Employees" Member="Employees2" ThisKey="EmployeeID" OtherKey="ReportsTo" Type="Employees" />
-      <Association Name="Employees_Employees" Member="Employees1" ThisKey="ReportsTo" OtherKey="EmployeeID" Type="Employees" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

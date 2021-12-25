@@ -14,32 +14,11 @@
         <elementListCompartment Id="c7570ef2-88a6-4803-ac29-97a04436f486" absoluteBounds="3.7649999999999997, 7.4600000000000009, 1.9700000000000002, 2.270863850911458" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.90625 : 7); (3.90625 : 6.15567260742187); (3 : 6.15567260742187)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/northwindDataContext/Customers/Customers_Orders" />
-      <nodes>
-        <classShapeMoniker Id="ada39448-127f-4055-8d95-d22b8fb14cfc" />
-        <classShapeMoniker Id="9a478918-0f67-4a33-9b06-0e83be94fcd4" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="9544750e-7e41-4d47-85f4-761200acc9e5" absoluteBounds="4.125, 1.875, 2, 4.1244226074218746">
+    <classShape Id="9544750e-7e41-4d47-85f4-761200acc9e5" absoluteBounds="4.125, 1.875, 2, 3.9396284993489576">
       <DataClassMoniker Name="/northwindDataContext/Employees" />
       <nestedChildShapes>
-        <elementListCompartment Id="4b1ec8fa-c49e-418f-b514-dd55be70b6b0" absoluteBounds="4.1400000000000006, 2.335, 1.9700000000000002, 3.564422607421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4b1ec8fa-c49e-418f-b514-dd55be70b6b0" absoluteBounds="4.1400000000000006, 2.335, 1.9700000000000002, 3.379628499348958" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.125 : 4.49971130371094); (3 : 4.49971130371094)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/northwindDataContext/Employees/Employees_Orders" />
-      <nodes>
-        <classShapeMoniker Id="9544750e-7e41-4d47-85f4-761200acc9e5" />
-        <classShapeMoniker Id="9a478918-0f67-4a33-9b06-0e83be94fcd4" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(4.83423076923077 : 5.99942260742187); (4.83423076923077 : 6.24942260742187); (5.42961538461539 : 6.24942260742187); (5.42961538461539 : 5.99942260742187)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/northwindDataContext/Employees/Employees_Employees" />
-      <nodes>
-        <classShapeMoniker Id="9544750e-7e41-4d47-85f4-761200acc9e5" />
-        <classShapeMoniker Id="9544750e-7e41-4d47-85f4-761200acc9e5" />
-      </nodes>
-    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

@@ -130,10 +130,6 @@ namespace ClassDB
 		
 		private string _ShipCountry;
 		
-		private EntityRef<Customers> _Customers;
-		
-		private EntityRef<Employees> _Employees;
-		
     #region 擴充性方法定義
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -170,8 +166,6 @@ namespace ClassDB
 		
 		public Orders()
 		{
-			this._Customers = default(EntityRef<Customers>);
-			this._Employees = default(EntityRef<Employees>);
 			OnCreated();
 		}
 		
@@ -206,10 +200,6 @@ namespace ClassDB
 			{
 				if ((this._CustomerID != value))
 				{
-					if (this._Customers.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnCustomerIDChanging(value);
 					this.SendPropertyChanging();
 					this._CustomerID = value;
@@ -230,10 +220,6 @@ namespace ClassDB
 			{
 				if ((this._EmployeeID != value))
 				{
-					if (this._Employees.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnEmployeeIDChanging(value);
 					this.SendPropertyChanging();
 					this._EmployeeID = value;
@@ -463,74 +449,6 @@ namespace ClassDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customers_Orders", Storage="_Customers", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public Customers Customers
-		{
-			get
-			{
-				return this._Customers.Entity;
-			}
-			set
-			{
-				Customers previousValue = this._Customers.Entity;
-				if (((previousValue != value) 
-							|| (this._Customers.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customers.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Customers.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._CustomerID = value.CustomerID;
-					}
-					else
-					{
-						this._CustomerID = default(string);
-					}
-					this.SendPropertyChanged("Customers");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employees_Orders", Storage="_Employees", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
-		public Employees Employees
-		{
-			get
-			{
-				return this._Employees.Entity;
-			}
-			set
-			{
-				Employees previousValue = this._Employees.Entity;
-				if (((previousValue != value) 
-							|| (this._Employees.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Employees.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Employees.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._EmployeeID = value.EmployeeID;
-					}
-					else
-					{
-						this._EmployeeID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Employees");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -580,8 +498,6 @@ namespace ClassDB
 		
 		private string _Fax;
 		
-		private EntitySet<Orders> _Orders;
-		
     #region 擴充性方法定義
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -612,7 +528,6 @@ namespace ClassDB
 		
 		public Customers()
 		{
-			this._Orders = new EntitySet<Orders>(new Action<Orders>(this.attach_Orders), new Action<Orders>(this.detach_Orders));
 			OnCreated();
 		}
 		
@@ -836,19 +751,6 @@ namespace ClassDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customers_Orders", Storage="_Orders", ThisKey="CustomerID", OtherKey="CustomerID")]
-		public EntitySet<Orders> Orders
-		{
-			get
-			{
-				return this._Orders;
-			}
-			set
-			{
-				this._Orders.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -867,18 +769,6 @@ namespace ClassDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Orders(Orders entity)
-		{
-			this.SendPropertyChanging();
-			entity.Customers = this;
-		}
-		
-		private void detach_Orders(Orders entity)
-		{
-			this.SendPropertyChanging();
-			entity.Customers = null;
 		}
 	}
 	
@@ -916,19 +806,11 @@ namespace ClassDB
 		
 		private string _Extension;
 		
-		private System.Data.Linq.Binary _Photo;
-		
 		private string _Notes;
 		
 		private System.Nullable<int> _ReportsTo;
 		
 		private string _PhotoPath;
-		
-		private EntitySet<Orders> _Orders;
-		
-		private EntitySet<Employees> _Employees2;
-		
-		private EntityRef<Employees> _Employees1;
 		
     #region 擴充性方法定義
     partial void OnLoaded();
@@ -962,8 +844,6 @@ namespace ClassDB
     partial void OnHomePhoneChanged();
     partial void OnExtensionChanging(string value);
     partial void OnExtensionChanged();
-    partial void OnPhotoChanging(System.Data.Linq.Binary value);
-    partial void OnPhotoChanged();
     partial void OnNotesChanging(string value);
     partial void OnNotesChanged();
     partial void OnReportsToChanging(System.Nullable<int> value);
@@ -974,9 +854,6 @@ namespace ClassDB
 		
 		public Employees()
 		{
-			this._Orders = new EntitySet<Orders>(new Action<Orders>(this.attach_Orders), new Action<Orders>(this.detach_Orders));
-			this._Employees2 = new EntitySet<Employees>(new Action<Employees>(this.attach_Employees2), new Action<Employees>(this.detach_Employees2));
-			this._Employees1 = default(EntityRef<Employees>);
 			OnCreated();
 		}
 		
@@ -1260,26 +1137,6 @@ namespace ClassDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Photo", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Photo
-		{
-			get
-			{
-				return this._Photo;
-			}
-			set
-			{
-				if ((this._Photo != value))
-				{
-					this.OnPhotoChanging(value);
-					this.SendPropertyChanging();
-					this._Photo = value;
-					this.SendPropertyChanged("Photo");
-					this.OnPhotoChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="NText", UpdateCheck=UpdateCheck.Never)]
 		public string Notes
 		{
@@ -1311,10 +1168,6 @@ namespace ClassDB
 			{
 				if ((this._ReportsTo != value))
 				{
-					if (this._Employees1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnReportsToChanging(value);
 					this.SendPropertyChanging();
 					this._ReportsTo = value;
@@ -1344,66 +1197,6 @@ namespace ClassDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employees_Orders", Storage="_Orders", ThisKey="EmployeeID", OtherKey="EmployeeID")]
-		public EntitySet<Orders> Orders
-		{
-			get
-			{
-				return this._Orders;
-			}
-			set
-			{
-				this._Orders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employees_Employees", Storage="_Employees2", ThisKey="EmployeeID", OtherKey="ReportsTo")]
-		public EntitySet<Employees> Employees2
-		{
-			get
-			{
-				return this._Employees2;
-			}
-			set
-			{
-				this._Employees2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employees_Employees", Storage="_Employees1", ThisKey="ReportsTo", OtherKey="EmployeeID", IsForeignKey=true)]
-		public Employees Employees1
-		{
-			get
-			{
-				return this._Employees1.Entity;
-			}
-			set
-			{
-				Employees previousValue = this._Employees1.Entity;
-				if (((previousValue != value) 
-							|| (this._Employees1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Employees1.Entity = null;
-						previousValue.Employees2.Remove(this);
-					}
-					this._Employees1.Entity = value;
-					if ((value != null))
-					{
-						value.Employees2.Add(this);
-						this._ReportsTo = value.EmployeeID;
-					}
-					else
-					{
-						this._ReportsTo = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Employees1");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1422,30 +1215,6 @@ namespace ClassDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Orders(Orders entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employees = this;
-		}
-		
-		private void detach_Orders(Orders entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employees = null;
-		}
-		
-		private void attach_Employees2(Employees entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employees1 = this;
-		}
-		
-		private void detach_Employees2(Employees entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employees1 = null;
 		}
 	}
 }
