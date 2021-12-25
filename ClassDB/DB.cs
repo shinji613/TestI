@@ -13,7 +13,7 @@ namespace ClassDB {
     public partial class Employees {
         public static Employees Get(int employeeID) {
             northwindDataContext nw = new northwindDataContext();
-
+            
             return nw.Employees.FirstOrDefault(e => e.EmployeeID == employeeID);
         }
 
@@ -43,7 +43,7 @@ namespace ClassDB {
             emp.Address = address;
 
             nw.Employees.InsertOnSubmit(emp);
-            nw.SubmitChanges();
+            nw.SubmitChanges();           
         }
 
         public static void Update(int employeeID, string lastName, string firstName, string address) {

@@ -5,16 +5,16 @@
 
     <div id="div_EmpInfo" runat="server" >
 
-    <h2>員工資訊 <asp:button ID="Button_Add" runat="server" text="新增員工" OnClick="Button_Add_Click" />  </h2> 
+    <h2>員工資訊<asp:button ID="Button_Add" runat="server" text="新增員工" OnClick="Button_Add_Click" />  </h2> 
 
     <asp:GridView ID="GridView_Emp" 
                   runat="server" 
                   DataKeyNames="EmployeeID" 
                   AutoGenerateColumns="false"
                   AllowPaging="true"
-                  PageSize="20"
+                  PageSize="5"
                   OnRowCommand="GridView_Emp_RowCommand"
-                  OnSelectedIndexChanging="GridView_Emp_SelectedIndexChanging" >
+                  OnPageIndexChanging="GridView_Emp_PageIndexChanging" >
         <Columns>
             <asp:ButtonField CommandName="Edi" ButtonType="Button" Text="編輯" />
             <asp:ButtonField CommandName="Del" ButtonType="Button" Text="刪除" />
@@ -35,7 +35,6 @@
                          AutoGenerateRows="false"
                          DefaultMode="Insert" >
             <Fields>
-               <asp:BoundField DataField="EmployeeID" HeaderText="員工編號" />
                <asp:BoundField DataField="LastName" HeaderText="LastName"  />
                <asp:BoundField DataField="FirstName" HeaderText="FirstName"  />
                <asp:BoundField DataField="Address" HeaderText="住家地址"  />
@@ -43,6 +42,8 @@
         </asp:DetailsView>
 
         <asp:Button ID="Button_New" runat="server" Text="新增員工資料" OnClick="Button_New_Click" />
+
+        <asp:Button ID="Button_NewBack" runat="server" text="返回員工資訊" OnClick="Button_Back_Click"  />
 
     </div>
 
@@ -62,6 +63,8 @@
         </asp:DetailsView>
 
         <asp:Button ID="Button_Edit" runat="server" Text="異動員工資料" OnClick="Button_Edit_Click" />
+
+        <asp:Button ID="Button_EditBack" runat="server" text="返回員工資訊" OnClick="Button_Back_Click"  />
     </div>
 
 </asp:Content>
