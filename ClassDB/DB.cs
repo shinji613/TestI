@@ -11,11 +11,16 @@ namespace ClassDB {
 
     /// <summary>員工</summary>
     public partial class Employees {
-
         public static Employees Get(int employeeID) {
             northwindDataContext nw = new northwindDataContext();
 
             return nw.Employees.FirstOrDefault(e => e.EmployeeID == employeeID);
+        }
+
+        public static Employees[] GetAll() {
+            northwindDataContext nw = new northwindDataContext();
+
+            return nw.Employees.ToArray();
         }
 
         private static int GetMaxSerial() {
@@ -25,7 +30,7 @@ namespace ClassDB {
                   nw.Employees.Max(e => e.EmployeeID) + 1 : constant.配號初始值;
         }
 
-        public static void New() {
+        public static void New(string lastName, string firstName, string address) {
             northwindDataContext nw = new northwindDataContext();
 
             Employees emp = new Employees();
@@ -33,21 +38,23 @@ namespace ClassDB {
             int serial = GetMaxSerial();
 
             emp.EmployeeID = serial;
-            emp.LastName = "LastName" + serial;
-            emp.FirstName = "FirstName" + serial;
-            emp.Address = "Address" + serial;
+            emp.LastName = lastName;
+            emp.FirstName = firstName;
+            emp.Address = address;
 
             nw.Employees.InsertOnSubmit(emp);
             nw.SubmitChanges();
         }
 
-        public static void Update(int employeeID, string address) {
+        public static void Update(int employeeID, string lastName, string firstName, string address) {
             northwindDataContext nw = new northwindDataContext();
 
             Employees emp = nw.Employees.FirstOrDefault(e => e.EmployeeID == employeeID);
 
             if (emp == null) return;
 
+            emp.LastName = lastName;
+            emp.FirstName = firstName;
             emp.Address = address;
 
             nw.SubmitChanges();
@@ -68,6 +75,7 @@ namespace ClassDB {
 
     /// <summary>訂單</summary>
     public partial class Orders {
+
         private Employees _getEmp;
 
         public Employees GetEmp {
@@ -81,7 +89,7 @@ namespace ClassDB {
                 return _getEmp;
             }
         }
-    
+
         public string EmpName {
             get {
                 if (GetEmp == null) return null;
