@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.1758
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{F3FE2DB1-E7C3-46D5-96BF-E917AF0F7F1D}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		ProjectReferences = "{51f44380-a8c4-434c-baac-8e81e3d655c9}|ClassDB.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_49578"
 		Debug.AspNetCompiler.PhysicalPath = "WebSite\"
@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassDB", "ClassDB\ClassDB.
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite2", "WebSite2\", "{918CD372-8545-44B2-B7C3-862786671740}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_57326"
 		Debug.AspNetCompiler.PhysicalPath = "WebSite2\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57326\"
