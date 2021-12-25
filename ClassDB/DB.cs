@@ -72,10 +72,56 @@ namespace ClassDB {
         public static Orders Get(int orderID) {
             northwindDataContext nw = new northwindDataContext();
 
-            return nw.Orders.FirstOrDefault(a => a.OrderID == orderID);
+            return nw.Orders.FirstOrDefault(o => o.OrderID == orderID);
         }
 
+        private static int GetMaxSerial() {
+            northwindDataContext nw = new northwindDataContext();
 
+            return nw.Orders.ToArray().Length != 0 ?
+                  nw.Orders.Max(o => o.OrderID) + 1 : constant.配號初始值;
+        }
+
+        public static void New(int employeeID, string customerID, string shipName) {
+            northwindDataContext nw = new northwindDataContext();
+
+            Orders order = new Orders();
+
+            int serial = GetMaxSerial();
+
+            order.OrderID = serial;
+            order.EmployeeID = employeeID;
+            order.CustomerID = customerID;
+            order.ShipName = shipName;
+            order.OrderDate = DateTime.Now;
+
+            nw.Orders.InsertOnSubmit(order);
+            nw.SubmitChanges();
+        }
+
+        public static void Update(int orderID, string shipName) {
+            northwindDataContext nw = new northwindDataContext();
+
+            Orders order = nw.Orders.FirstOrDefault(o => o.OrderID == orderID);
+
+            if (order == null) return;
+
+            order.ShipName = shipName;
+
+            nw.SubmitChanges();
+        }
+
+        public static void Delete(int orderID) {
+            northwindDataContext nw = new northwindDataContext();
+
+            Orders order = nw.Orders.FirstOrDefault(o => o.OrderID == orderID);
+
+            if (order == null) return;
+
+            nw.Orders.DeleteOnSubmit(order);
+
+            nw.SubmitChanges();
+        }
     }
 
     /// <summary>顧客</summary>
@@ -84,7 +130,49 @@ namespace ClassDB {
         public static Customers Get(string customerID) {
             northwindDataContext nw = new northwindDataContext();
 
-            return nw.Customers.FirstOrDefault(a => a.CustomerID == customerID);
+            return nw.Customers.FirstOrDefault(c => c.CustomerID == customerID);
+        }
+
+        public static void New(string contactName, string address, string phone) { 
+            northwindDataContext nw = new northwindDataContext();
+
+            Customers customer = new Customers();
+
+            string guid = Guid.NewGuid().ToString().Substring(0,8);
+
+            customer.CustomerID = guid;
+            customer.ContactName = contactName;
+            customer.Address = address;
+            customer.Phone = phone;
+
+            nw.Customers.InsertOnSubmit(customer);
+            nw.SubmitChanges();
+        }
+
+        public static void Update(string customerID, string contactName, string address, string phone) {
+            northwindDataContext nw = new northwindDataContext();
+
+            Customers customer = nw.Customers.FirstOrDefault(o => o.CustomerID == customerID);
+
+            if (customer == null) return;
+
+            customer.ContactName = contactName;
+            customer.Address = address;
+            customer.Phone = phone;
+
+            nw.SubmitChanges();
+        }
+
+        public static void Delete(string customerID) {
+            northwindDataContext nw = new northwindDataContext();
+
+            Customers customer = nw.Customers.FirstOrDefault(o => o.CustomerID == customerID);
+
+            if (customer == null) return;
+
+            nw.Customers.DeleteOnSubmit(customer);
+
+            nw.SubmitChanges();
         }
     }
 }
