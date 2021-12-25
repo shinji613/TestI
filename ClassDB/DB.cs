@@ -68,11 +68,60 @@ namespace ClassDB {
 
     /// <summary>訂單</summary>
     public partial class Orders {
+        private Employees _getEmp;
+
+        public Employees GetEmp {
+            get {
+                if (_getEmp == null) {
+                    if (!EmployeeID.HasValue) return null;
+
+                    _getEmp = Employees.Get(EmployeeID.Value);
+                }
+
+                return _getEmp;
+            }
+        }
+    
+        public string EmpName {
+            get {
+                if (GetEmp == null) return null;
+
+                return GetEmp.FirstName + GetEmp.LastName;
+            }
+        }
+
+        private Customers _getCustomer;
+
+        public Customers GetCustomer {
+            get {
+                if (_getCustomer == null) {
+                    if (string.IsNullOrEmpty(CustomerID)) return null;
+
+                    _getCustomer = Customers.Get(CustomerID);
+                }
+
+                return _getCustomer;
+            }
+        }
+
+        public string CustomerName {
+            get {
+                if (GetCustomer == null) return null;
+
+                return GetCustomer.ContactName;
+            }
+        }
 
         public static Orders Get(int orderID) {
             northwindDataContext nw = new northwindDataContext();
 
             return nw.Orders.FirstOrDefault(o => o.OrderID == orderID);
+        }
+
+        public static Orders[] FindByCustomer(string customerID) {
+            northwindDataContext nw = new northwindDataContext();
+
+            return nw.Orders.Where(o => o.CustomerID == customerID).ToArray();
         }
 
         private static int GetMaxSerial() {

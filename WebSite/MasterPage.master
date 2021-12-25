@@ -5,15 +5,16 @@
 <html>
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>顧客查詢資料</title>
     <asp:ContentPlaceHolder id="head" runat="server">
+       
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+    <div>      
+        <asp:Image ID="Image_Title" runat="server"  ImageUrl="~/Data/Image/title.png"  /><br />
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
-        
         </asp:ContentPlaceHolder>
     </div>
     </form>
